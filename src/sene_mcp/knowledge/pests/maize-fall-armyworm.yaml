@@ -1,0 +1,41 @@
+id: maize-fall-armyworm
+crops: [maize, millet_sorghum]
+names:
+  fr: Chenille légionnaire d'automne
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Spodoptera frugiperda
+kind: insect
+symptoms:
+  - petites plages translucides sur les jeunes feuilles, comme des fenêtres
+  - trous irréguliers dans les feuilles, qui s'agrandissent quand la feuille se déroule
+  - déjections humides, comme de la sciure, dans le cornet
+  - cornet dévoré ou détruit sur les plants jeunes
+  - épis ou panicules percés et abîmés en fin de cycle
+  - chenille avec un Y clair renversé sur la tête et quatre points en carré près de l'arrière
+keywords: [chenille, trous, fenêtres, cornet, sciure, déjections, épi, panicule, feuilles mangées]
+season: Surtout en début de cycle, sur les plants jeunes, dès la levée
+severity: high
+management:
+  prevention:
+    - Inspecter le champ chaque semaine dès la levée, sur plusieurs plants répartis dans tout le champ
+    - Semer tôt et à la même période que les champs voisins
+    - Utiliser les variétés tolérantes recommandées localement, quand elles existent
+  cultural:
+    - Écraser à la main les masses d'œufs et les jeunes chenilles repérées lors des inspections
+    - Associer le maïs à d'autres cultures (par exemple des légumineuses) ou pratiquer la méthode push-pull
+    - Garder des plants vigoureux par une bonne fertilité du sol
+  biological:
+    - Préserver les ennemis naturels (fourmis, guêpes parasitoïdes, perce-oreilles, oiseaux) en évitant les traitements inutiles
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Manual on integrated fall armyworm management
+    publisher: FAO
+    url: https://openknowledge.fao.org/server/api/core/bitstreams/9b3b2198-00ef-4484-91e6-fc8c87a505c5/content
+    consulted_on: 2026-09-24
+  - title: Sustainable management — Global Action for Fall Armyworm Control
+    publisher: FAO
+    url: https://www.fao.org/fall-armyworm/sustainablemanagement/en/
+    consulted_on: 2026-09-24
+review_status: sourced

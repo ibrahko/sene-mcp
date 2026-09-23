@@ -1,0 +1,41 @@
+id: rice-yellow-mottle-virus
+crops: [rice]
+names:
+  fr: Panachure jaune du riz
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Rice yellow mottle virus (RYMV)
+kind: disease
+symptoms:
+  - marbrures ou taches jaune-vert sur les jeunes feuilles
+  - feuilles qui jaunissent, parfois jusqu'à l'orange
+  - plants rabougris, plus petits que les voisins
+  - tallage réduit
+  - panicules mal sorties et grains vides
+keywords: [jaune, jaunissement, marbrure, taches, rabougri, nain, tallage, grains vides, panachure]
+season: Toute la campagne ; les plants infectés jeunes souffrent le plus
+severity: high
+management:
+  prevention:
+    - Utiliser les variétés résistantes ou tolérantes recommandées par la recherche agricole locale
+    - Installer la pépinière loin des champs où la maladie a été vue
+    - Semer à la même période que les champs voisins
+    - Laisser une période sans riz entre deux campagnes
+  cultural:
+    - Arracher et détruire les plants malades dès qu'ils sont repérés
+    - Éliminer les repousses et les résidus de riz après la récolte
+    - Désherber tôt, et deux fois
+    - Limiter les blessures aux plants lors du repiquage
+  biological: []
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Rice yellow mottle virus
+    publisher: Infonet-Biovision
+    url: https://www.infonet-biovision.org/PlantHealth/MinorPests/rice-yellow-mottle-virus
+    consulted_on: 2026-09-24
+  - title: Rice Yellow Mottle Virus fact sheet
+    publisher: IRRI Rice Knowledge Bank
+    url: http://www.knowledgebank.irri.org/training/fact-sheets/pest-management/diseases/item/rice-yellow-mottle-virus-fact-sheet
+    consulted_on: 2026-09-24
+review_status: sourced
