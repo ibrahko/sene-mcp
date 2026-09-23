@@ -8,7 +8,7 @@ from __future__ import annotations
 import sys
 import time
 from collections.abc import Callable
-from typing import TypeVar
+from typing import Annotated, Literal, TypeVar
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
@@ -32,6 +32,7 @@ INSTRUCTIONS = (
 )
 
 T = TypeVar("T")
+ProductName = Literal["maize", "rice", "millet", "sorghum"]
 
 
 # ---------- Output schemas ----------
@@ -109,13 +110,18 @@ def build_server(repo: Repository, kb: KnowledgeBase) -> MCPServer:
                 print(f"sene-mcp: could not log tool call: {log_exc}", file=sys.stderr)
 
     @server.tool()
-    def get_market_price(product: str, market: str | None = None) -> MarketPriceResult:
-        """Latest price per kg, in FCFA, of a crop product on Malian markets.
-
-        Args:
-            product: one of maize, rice, millet, sorghum.
-            market: optional market name or town (e.g. "Ségou"). Omit to get all markets.
-        """
+    def get_market_price(
+        product: Annotated[ProductName, Field(description="Crop product to price")],
+        market: Annotated[
+            str | None,
+            Field(
+                default=None,
+                max_length=100,
+                description='Market name or town, e.g. "Ségou". Omit to get all markets.',
+            ),
+        ] = None,
+    ) -> MarketPriceResult:
+        """Latest price per kg, in FCFA, of a crop product on Malian markets."""
 
         def action() -> MarketPriceResult:
             prices = market_domain.get_market_prices(repo, product, market)
@@ -138,13 +144,15 @@ def build_server(repo: Repository, kb: KnowledgeBase) -> MCPServer:
         return run_logged("get_market_price", f"product={product} market={market}", action)
 
     @server.tool()
-    def get_pest_sheet(pest_sheet_id: str) -> PestSheetResult:
+    def get_pest_sheet(
+        pest_sheet_id: Annotated[
+            str,
+            Field(min_length=1, max_length=100, description='Sheet id, e.g. "maize-fall-armyworm"'),
+        ],
+    ) -> PestSheetResult:
         """Full pest sheet: symptoms, prevention and non-chemical control, sources.
 
         Treatments are never described: repeat `treatment_guidance` as is.
-
-        Args:
-            pest_sheet_id: sheet id, e.g. "maize-fall-armyworm".
         """
 
         def action() -> PestSheetResult:
@@ -187,6 +195,7 @@ def main() -> None:
     from sene_mcp.seed import prepare_database
 
     settings = load_settings()
+    print(f"sene-mcp: database {settings.database_url}", file=sys.stderr)
     engine = prepare_database(settings.database_url)
     server = build_server(SqlRepository(engine), YamlKnowledgeBase(settings.knowledge_dir))
     server.run("stdio")

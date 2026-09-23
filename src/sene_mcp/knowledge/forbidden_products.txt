@@ -1,0 +1,78 @@
+# Words that must never appear in a pest sheet or a tool output. One per line.
+#
+# Matching ignores case, accents and punctuation ("Lambda-cyhalothrine" = "lambda cyhalothrin")
+# and accepts an optional final "e" (English and French spellings).
+# Words that are also ordinary French or English words (e.g. "Tracer", "Belt") are left
+# out on purpose, to avoid false alarms.
+#
+# Not exhaustive. TODO: complete with the Sahelian Pesticide Committee (CSP) list of
+# products registered for maize, rice, millet and sorghum. The real protection is that
+# sheets are written and reviewed by hand; this list catches slips.
+
+# Active ingredients (stems)
+abamectin
+acephat
+acetamiprid
+alpha cypermethrin
+beta cyfluthrin
+bifenthrin
+carbaryl
+carbofuran
+chlorantraniliprol
+chlorpyrifos
+cyantraniliprol
+cypermethrin
+deltamethrin
+dimethoat
+emamectin
+endosulfan
+fipronil
+flubendiamid
+imidacloprid
+indoxacarb
+lambda cyhalothrin
+lufenuron
+malathion
+novaluron
+permethrin
+profenofos
+spinetoram
+spinosad
+teflubenzuron
+thiamethoxam
+thiodicarb
+bacillus thuringiensis
+atrazin
+bentazon
+butachlor
+glyphosat
+metolachlor
+nicosulfuron
+oxadiazon
+paraquat
+pendimethalin
+propanil
+2 4 d
+azoxystrobin
+carbendazim
+hexaconazol
+mancozeb
+metalaxyl
+propiconazol
+tebuconazol
+thiram
+tricyclazol
+
+# Trade names
+ampligo
+actara
+confidor
+coragen
+decis
+dithane
+fortenza
+furadan
+gramoxone
+karate
+proclaim
+roundup

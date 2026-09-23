@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from sene_mcp.db.tables import MarketPriceRow, MarketRow, ToolCallLogRow
 from sene_mcp.domain.models import Market, MarketPrice, Product
-from sene_mcp.domain.text import fold
+from sene_mcp.domain.text import fold, without_parentheses
 
 
 def _market(row: MarketRow) -> Market:
@@ -28,9 +28,9 @@ class SqlRepository:
 
     def find_market(self, name: str) -> Market | None:
         """Match on the market name or its town, ignoring case and accents ("segou" = "Ségou")."""
-        needle = fold(name)
+        needle = fold(without_parentheses(name))
         for market in self.list_markets():
-            if needle in (fold(market.name), fold(market.town)):
+            if needle in (fold(without_parentheses(market.name)), fold(market.town)):
                 return market
         return None
 

@@ -12,6 +12,7 @@ MIGRATIONS_DIR = Path(__file__).resolve().parent / "migrations"
 
 def upgrade_to_head(database_url: str) -> None:
     config = Config()
-    config.set_main_option("script_location", str(MIGRATIONS_DIR))
-    config.set_main_option("sqlalchemy.url", database_url)
+    config.set_main_option("script_location", str(MIGRATIONS_DIR).replace("%", "%%"))
+    # ConfigParser treats "%" as interpolation: escape it so paths like "100%bio" work.
+    config.set_main_option("sqlalchemy.url", database_url.replace("%", "%%"))
     command.upgrade(config, "head")

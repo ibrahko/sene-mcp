@@ -18,6 +18,7 @@ from sene_mcp.domain.models import (
     Severity,
     Source,
 )
+from sene_mcp.domain.safety import TREATMENT_GUIDANCE, find_violations_in
 
 
 class SheetFormatError(ValueError):
@@ -69,12 +70,30 @@ def parse_sheet(data: dict[str, Any], origin: str = "<memory>") -> PestSheet:
         raise SheetFormatError(f"{origin}: invalid pest sheet ({exc})") from exc
 
 
+def check_sheet_safety(data: dict[str, Any], origin: str = "<memory>") -> None:
+    """Refuse a sheet that contains a dose or a product name, in any field.
+
+    `treatment_guidance` is exempt from the scan but must be the fixed referral text.
+    """
+    content = {k: v for k, v in data.items() if k != "treatment_guidance"}
+    violations = find_violations_in(content)
+    if violations:
+        raise SheetFormatError(f"{origin}: forbidden content: {'; '.join(violations)}")
+    guidance = " ".join(str(data.get("treatment_guidance", "")).split())
+    if guidance != TREATMENT_GUIDANCE:
+        raise SheetFormatError(f"{origin}: treatment_guidance must be the fixed referral text")
+
+
 class YamlKnowledgeBase:
     def __init__(self, directory: Path) -> None:
         self._sheets: dict[str, PestSheet] = {}
         for path in sorted(directory.glob("*.yaml")):
             with path.open(encoding="utf-8") as handle:
-                sheet = parse_sheet(yaml.safe_load(handle), origin=path.name)
+                data = yaml.safe_load(handle)
+            if not isinstance(data, dict):
+                raise SheetFormatError(f"{path.name}: expected a mapping")
+            check_sheet_safety(data, origin=path.name)
+            sheet = parse_sheet(data, origin=path.name)
             if sheet.id in self._sheets:
                 raise SheetFormatError(f"{path.name}: duplicate sheet id {sheet.id!r}")
             if path.stem != sheet.id:

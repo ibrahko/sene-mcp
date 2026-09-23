@@ -12,6 +12,12 @@ from sene_mcp.config import DEFAULT_KNOWLEDGE_DIR
 from sene_mcp.seed import prepare_database
 
 
+@pytest.fixture(autouse=True)
+def _isolated_data_dir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Never touch the real per-user data folder during tests."""
+    monkeypatch.setenv("SENE_DATA_DIR", str(tmp_path / "user-data"))
+
+
 @pytest.fixture
 def engine(tmp_path: Path) -> Iterator[Engine]:
     engine = prepare_database(f"sqlite:///{tmp_path / 'test.db'}")

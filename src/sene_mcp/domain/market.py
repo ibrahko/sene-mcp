@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from sene_mcp.domain.models import DomainError, MarketPrice, Product
+from sene_mcp.domain.text import short
 from sene_mcp.ports.repository import Repository
 
 
@@ -11,7 +12,9 @@ def parse_product(value: str) -> Product:
         return Product(value.strip().lower())
     except ValueError:
         known = ", ".join(p.value for p in Product)
-        raise DomainError("UNKNOWN_PRODUCT", f"{value!r} is not covered. Known: {known}.") from None
+        raise DomainError(
+            "UNKNOWN_PRODUCT", f"{short(value)} is not covered. Known: {known}."
+        ) from None
 
 
 def get_market_prices(
@@ -25,7 +28,7 @@ def get_market_prices(
         if found is None:
             known = ", ".join(m.name for m in repo.list_markets())
             raise DomainError(
-                "UNKNOWN_MARKET", f"{market!r} is not a known market. Known: {known}."
+                "UNKNOWN_MARKET", f"{short(market)} is not a known market. Known: {known}."
             )
         market_id = found.id
     return repo.latest_prices(parsed, market_id)

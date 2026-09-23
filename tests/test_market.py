@@ -40,3 +40,14 @@ def test_unknown_market_lists_known_ones(repo: SqlRepository) -> None:
         get_market_prices(repo, "maize", "Tombouctou")
     assert exc.value.code == "UNKNOWN_MARKET"
     assert "Bamako" in exc.value.message
+
+
+def test_market_name_without_the_demo_label_matches(repo: SqlRepository) -> None:
+    prices = get_market_prices(repo, "rice", "Marche de Mopti")
+    assert [p.market.town for p in prices] == ["Mopti"]
+
+
+def test_error_messages_do_not_echo_huge_inputs(repo: SqlRepository) -> None:
+    with pytest.raises(DomainError) as exc:
+        get_market_prices(repo, "maize", "x" * 5000)
+    assert len(exc.value.message) < 400

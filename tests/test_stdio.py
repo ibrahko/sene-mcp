@@ -4,6 +4,7 @@ exactly as Claude Desktop or MCP Inspector would."""
 from __future__ import annotations
 
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -12,9 +13,13 @@ from mcp.client.stdio import StdioServerParameters
 
 
 def _params(tmp_path: Path) -> StdioServerParameters:
+    # Use the installed `sene-mcp` entry point, as the README promises.
+    scripts = Path(sys.executable).parent
+    entry = shutil.which("sene-mcp", path=str(scripts)) or shutil.which("sene-mcp")
+    assert entry, "the sene-mcp entry point is not installed"
     return StdioServerParameters(
-        command=sys.executable,
-        args=["-m", "sene_mcp.server"],
+        command=entry,
+        args=[],
         env={"SENE_DATABASE_URL": f"sqlite:///{tmp_path / 'stdio.db'}"},
     )
 
