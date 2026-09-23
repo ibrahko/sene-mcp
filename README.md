@@ -1,5 +1,7 @@
 # sene-mcp
 
+**English** · [Français](README.fr.md)
+
 > **Work in progress — v0.1 under construction.** Lot 1 of 3: server skeleton, 2 tools, CI.
 
 An [MCP](https://modelcontextprotocol.io) server that gives AI agents **safe, sourced tools** for farming cooperatives in Mali: crop pest guidance and market prices.
@@ -61,6 +63,11 @@ uv run mypy                 # types (strict)
 uv run alembic upgrade head # migrations, for development
 ```
 
+## Author
+
+**Ibrahima Koné** — backend Python & AI engineer, Bamako, Mali
+[GitHub](https://github.com/ibrahko) · [LinkedIn](https://www.linkedin.com/in/ibrahima-koné-632006a1)
+
 ## License
 
-MIT
+MIT © 2026 Ibrahima Koné
