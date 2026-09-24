@@ -1,0 +1,39 @@
+id: maize-stem-borers
+crops: [maize, millet_sorghum]
+names:
+  fr: Foreurs des tiges
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Busseola fusca, Sesamia calamistis, Chilo partellus
+kind: insect
+symptoms:
+  - petits trous alignés en travers des jeunes feuilles
+  - cœur de la plante qui sèche sur les jeunes plants (cœur mort)
+  - tiges creusées de galeries, plants qui cassent ou se couchent
+  - épis ou panicules vides ou percés
+keywords: [foreur, trous alignés, coeur mort, tige creuse, galerie, plant couché, chenille dans la tige]
+season: Toute la campagne ; les attaques précoces sont les plus graves
+severity: medium
+management:
+  prevention:
+    - Semer tôt, dans les deux premières semaines après l'installation des pluies
+    - Préparer le sol tôt
+  cultural:
+    - Détruire les vieilles tiges et les chaumes après la récolte pour éliminer les chrysalides
+    - Associer la céréale à des cultures non hôtes (légumineuses, manioc)
+    - Pratiquer la rotation avec des légumineuses
+    - Méthode push-pull, avec du desmodium entre les rangs et une bordure de graminée piège
+  biological:
+    - Préserver les ennemis naturels (guêpes parasitoïdes, fourmis, perce-oreilles, araignées)
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Maize (Revised)
+    publisher: Infonet-Biovision
+    url: https://www.infonet-biovision.org/crops-fruits-vegetables/maize-revised
+    consulted_on: 2026-09-25
+  - title: Millet
+    publisher: Infonet-Biovision
+    url: https://infonet-biovision.org/crops-fruits-vegetables/millet
+    consulted_on: 2026-09-25
+review_status: sourced

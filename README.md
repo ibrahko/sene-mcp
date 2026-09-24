@@ -65,7 +65,7 @@ uv run alembic upgrade head # migrations, for development
 
 ## Author
 
-**Ibrahima Koné** — backend Python & AI engineer, Bamako, Mali
+**Ibrahima Koné** — backend Python & AI engineer, Bamako, Mali  
 [GitHub](https://github.com/ibrahko) · [LinkedIn](https://www.linkedin.com/in/ibrahima-koné-632006a1)
 
 ## License

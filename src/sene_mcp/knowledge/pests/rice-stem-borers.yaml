@@ -1,0 +1,32 @@
+id: rice-stem-borers
+crops: [rice]
+names:
+  fr: Foreurs des tiges du riz
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Chilo spp., Maliarpha separatella, Scirpophaga spp.
+kind: insect
+symptoms:
+  - cœur de la talle qui sèche sur les jeunes plants (cœur mort)
+  - panicules blanches et vides (panicule blanche)
+  - tiges creusées, plants qui se couchent
+keywords: [foreur, coeur mort, panicule blanche, tige creuse, chenille, plant couché]
+season: Toute la campagne
+severity: medium
+management:
+  prevention:
+    - Utiliser les variétés résistantes recommandées localement
+    - Semer tôt et en même temps que les parcelles voisines
+  cultural:
+    - Enfouir ou détruire les résidus de culture après la récolte, puis labourer et inonder
+    - Maintenir un bon niveau d'eau dans la rizière
+  biological:
+    - Préserver les ennemis naturels (guêpes parasitoïdes, araignées, libellules, punaises prédatrices)
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Rice (Revised)
+    publisher: Infonet-Biovision
+    url: https://infonet-biovision.org/crops-fruits-vegetables/rice-revised
+    consulted_on: 2026-09-25
+review_status: sourced

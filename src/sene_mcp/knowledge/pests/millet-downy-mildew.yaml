@@ -1,0 +1,36 @@
+id: millet-downy-mildew
+crops: [millet_sorghum]
+names:
+  fr: Mildiou du mil
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Sclerospora graminicola
+kind: disease
+symptoms:
+  - jaunissement qui part de la base des feuilles et monte le long du plant
+  - duvet blanc grisâtre sous les feuilles
+  - plants rabougris qui ne font pas d'épi
+  - épi transformé en petites feuilles (épi vert)
+keywords: [mildiou, duvet blanc, jaunissement, épi vert, rabougri, mil]
+season: Surtout en saison des pluies
+severity: high
+management:
+  prevention:
+    - Utiliser les variétés résistantes recommandées localement
+    - Semer des semences de variétés résistantes plutôt que des variétés sensibles
+  cultural:
+    - Pratiquer la rotation et l'assainissement du champ pour réduire la source de la maladie
+    - Éviter de cultiver la même variété sensible année après année dans le même champ
+  biological: []
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Millet
+    publisher: Infonet-Biovision
+    url: https://infonet-biovision.org/crops-fruits-vegetables/millet
+    consulted_on: 2026-09-25
+  - title: Downy Mildew of Pearl Millet and its Management
+    publisher: ICAR — All India Coordinated Research Project on Pearl Millet (via ICRISAT)
+    url: https://oar.icrisat.org/9411/1/Downy%20mildew%20of%20pearl%20millet%20and%20its%20management.pdf
+    consulted_on: 2026-09-25
+review_status: sourced

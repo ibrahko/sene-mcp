@@ -20,7 +20,7 @@ TREATMENT_GUIDANCE = (
     "Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation de votre zone."
 )
 
-_NUMBER = r"\d+(?:[.,]\d+)?"
+_NUMBER = r"(?:\d+(?:[.,]\d+)?|un|une|un demi|une demie?|demi|deux|trois|quatre|cinq)"
 # What is measured out: weights, volumes, and the containers used on the field.
 _QUANTITY = (
     r"(?:g|kg|mg|ml|l|cl|cc|litres?|liters?|sachets?|bidons?|boites?|cuilleres?|"
@@ -31,12 +31,17 @@ _TARGET = (
     r"(?:l|litres?|liters?|ha|hectares?|acres?|m2|pompes?|pulverisateurs?|sprayers?|"
     r"bidons?|seaux?|kg)"
 )
+# How the two are linked: "/", "par", "pour", "dans", "à l'", "au"...
+_LINK = r"(?:/|par|per|pour|for|dans|in|a l'|a la|au|a)"
 # "2 g/l", "50 ml / ha", "1,5 kg par hectare", "20 ml pour 15 litres d'eau",
-# "40 ml/15 l", "1 sachet par pompe", "0,5 L/acre"...
+# "20 ml de produit pour 15 litres", "40 ml/15 l", "1 sachet par pompe", "0,5 L/acre",
+# "250 g à l'hectare", "un demi-litre par hectare"...
+# The target must not be an elided article ("pour l'eau" is not "pour 1 l").
 _DOSAGE = re.compile(
-    rf"{_NUMBER}\s*{_QUANTITY}\s*(?:/|par|per|pour|for)\s*"
-    rf"(?:{_NUMBER}\s*|(?:un|une|a|one|le|la|chaque|each)\s+)?"
-    rf"(?:(?:d'|de |du |of )\s*)?{_TARGET}\b"
+    rf"\b{_NUMBER}[\s-]*{_QUANTITY}\s*(?:a (?:soupe|cafe)\s+)?"
+    rf"(?:(?:de|d'|du|des|of)\s*[a-z]+\s+)?{_LINK}\s*"
+    rf"(?:\d+(?:[.,]\d+)?\s*|(?:un|une|a|one|le|la|chaque|each)\s+)?"
+    rf"(?:(?:d'|de |du |of )\s*)?{_TARGET}\b(?!['\u2019])"
 )
 _DOSAGE_WORDS = re.compile(r"\b(?:doses?|dosages?|posologie)\b")
 
@@ -47,15 +52,27 @@ def _normalize(text: str) -> str:
 
 
 @cache
-def _forbidden_words() -> tuple[re.Pattern[str], ...]:
+def _forbidden_words() -> tuple[tuple[re.Pattern[str], ...], tuple[re.Pattern[str], ...]]:
+    """(patterns on normalized text, raw patterns on folded text).
+
+    A plain line is a stem: matched on normalized text, with an optional final "e", and
+    the space between words optional ("lambda cyhalothrin" also catches
+    "lambdacyhalothrine"). A line starting with "re:" is a regular expression applied to
+    folded text, for names that normalization would break (e.g. "2,4-D").
+    """
     raw = resources.files("sene_mcp.knowledge").joinpath("forbidden_products.txt")
-    patterns = []
+    stems: list[re.Pattern[str]] = []
+    regexes: list[re.Pattern[str]] = []
     for line in raw.read_text(encoding="utf-8").splitlines():
-        word = line.strip()
-        if word and not word.startswith("#"):
-            stem = _normalize(word)
-            patterns.append(re.compile(rf"\b{re.escape(stem)}e?\b"))
-    return tuple(patterns)
+        entry = line.strip()
+        if not entry or entry.startswith("#"):
+            continue
+        if entry.startswith("re:"):
+            regexes.append(re.compile(entry[3:].strip()))
+        else:
+            words = [re.escape(w) for w in _normalize(entry).split()]
+            stems.append(re.compile(rf"\b{' ?'.join(words)}e?\b"))
+    return tuple(stems), tuple(regexes)
 
 
 def find_violations(text: str) -> list[str]:
@@ -63,8 +80,10 @@ def find_violations(text: str) -> list[str]:
     folded = fold(text)
     violations = [f"dosage: {m.group(0)!r}" for m in _DOSAGE.finditer(folded)]
     violations += [f"dosage word: {m.group(0)!r}" for m in _DOSAGE_WORDS.finditer(folded)]
+    stems, regexes = _forbidden_words()
     normalized = _normalize(text)
-    violations += [f"product: {p.pattern!r}" for p in _forbidden_words() if p.search(normalized)]
+    violations += [f"product: {p.pattern!r}" for p in stems if p.search(normalized)]
+    violations += [f"product: {p.pattern!r}" for p in regexes if p.search(folded)]
     return violations
 
 

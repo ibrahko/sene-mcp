@@ -65,9 +65,17 @@ async def test_product_is_an_enum_in_the_input_schema(server: Any) -> None:
         assert f'"{product}"' in schema
 
 
-async def test_unknown_product_is_rejected_by_the_schema(server: Any) -> None:
-    with pytest.raises(ToolError):
+async def test_unknown_product_returns_the_stable_code_and_is_logged(
+    server: Any, repo: SqlRepository
+) -> None:
+    with pytest.raises(ToolError, match="UNKNOWN_PRODUCT"):
         await server.call_tool("get_market_price", {"product": "cotton"})
+    assert repo.count_tool_calls() == 1
+
+
+async def test_product_is_case_insensitive(server: Any) -> None:
+    data = _payload(await server.call_tool("get_market_price", {"product": " RICE "}))
+    assert data["product"] == "rice"
 
 
 async def test_pest_sheet_id_is_case_insensitive(server: Any) -> None:

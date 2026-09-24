@@ -1,7 +1,8 @@
 # Words that must never appear in a pest sheet or a tool output. One per line.
 #
-# Matching ignores case, accents and punctuation ("Lambda-cyhalothrine" = "lambda cyhalothrin")
-# and accepts an optional final "e" (English and French spellings).
+# Matching ignores case, accents and punctuation ("Lambda-cyhalothrine" = "lambda cyhalothrin"
+# = "lambdacyhalothrine") and accepts an optional final "e" (English and French spellings).
+# A line starting with "re:" is a regular expression on lowercased, accent-free text.
 # Words that are also ordinary French or English words (e.g. "Tracer", "Belt") are left
 # out on purpose, to avoid false alarms.
 #
@@ -41,6 +42,9 @@ spinosad
 teflubenzuron
 thiamethoxam
 thiodicarb
+# Bacillus thuringiensis (Bt) is a commercial biopesticide: it is a treatment, so it is
+# forbidden like the others, even though FAO recommends it. Sheets refer farmers to the
+# extension service instead (see the fixed treatment_guidance).
 bacillus thuringiensis
 atrazin
 bentazon
@@ -52,7 +56,7 @@ oxadiazon
 paraquat
 pendimethalin
 propanil
-2 4 d
+re: \b2\s*[,-]\s*4\s*-\s*d\b
 azoxystrobin
 carbendazim
 hexaconazol
@@ -76,3 +80,11 @@ gramoxone
 karate
 proclaim
 roundup
+# Brands commonly sold in West Africa
+cypercal
+emacot
+k optimal
+lambda super
+pacha
+pyrinex
+tihan

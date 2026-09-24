@@ -8,7 +8,7 @@ from __future__ import annotations
 import sys
 import time
 from collections.abc import Callable
-from typing import Annotated, Literal, TypeVar
+from typing import Annotated, TypeVar
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
@@ -20,7 +20,7 @@ from sene_mcp.adapters.yaml_knowledge import YamlKnowledgeBase
 from sene_mcp.config import load_settings
 from sene_mcp.domain import market as market_domain
 from sene_mcp.domain import pests as pests_domain
-from sene_mcp.domain.models import DomainError
+from sene_mcp.domain.models import DomainError, Product
 from sene_mcp.ports.knowledge import KnowledgeBase
 from sene_mcp.ports.repository import Repository
 
@@ -32,7 +32,9 @@ INSTRUCTIONS = (
 )
 
 T = TypeVar("T")
-ProductName = Literal["maize", "rice", "millet", "sorghum"]
+# Advertised as an enum in the input schema to guide agents, but validated by the domain,
+# so an unknown product returns the stable UNKNOWN_PRODUCT code and is logged.
+PRODUCT_NAMES = tuple(p.value for p in Product)
 
 
 # ---------- Output schemas ----------
@@ -111,7 +113,14 @@ def build_server(repo: Repository, kb: KnowledgeBase) -> MCPServer:
 
     @server.tool()
     def get_market_price(
-        product: Annotated[ProductName, Field(description="Crop product to price")],
+        product: Annotated[
+            str,
+            Field(
+                max_length=30,
+                description="Crop product to price",
+                json_schema_extra={"enum": list(PRODUCT_NAMES)},
+            ),
+        ],
         market: Annotated[
             str | None,
             Field(

@@ -1,0 +1,30 @@
+id: millet-head-miner
+crops: [millet_sorghum]
+names:
+  fr: Mineuse de l'épi du mil
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Heliocheilus albipunctella
+kind: insect
+symptoms:
+  - chenilles qui creusent des galeries dans l'épi du mil
+  - grains en formation mangés à l'intérieur de l'épi
+  - épis mal remplis ; la récolte peut être entièrement perdue
+keywords: [mineuse, épi, chenille dans l'épi, galerie, grains mangés, mil]
+season: De l'épiaison à la floraison du mil
+severity: high
+management:
+  prevention:
+    - Semer des variétés à cycle court avec un léger décalage de date, pour que la floraison ne coïncide pas avec le vol des papillons
+  cultural:
+    - Labourer profondément après la récolte pour exposer les chrysalides dans le sol
+  biological:
+    - Préserver et favoriser les ennemis naturels, notamment la petite guêpe Habrobracon hebetor
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Millet head miner
+    publisher: Infonet-Biovision
+    url: https://infonet-biovision.org/PlantHealth/MinorPests/millet-head-miner
+    consulted_on: 2026-09-25
+review_status: sourced

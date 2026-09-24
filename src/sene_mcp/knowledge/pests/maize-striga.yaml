@@ -1,0 +1,32 @@
+id: maize-striga
+crops: [maize, millet_sorghum]
+names:
+  fr: Striga (herbe sorcière)
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Striga hermonthica
+kind: weed
+symptoms:
+  - plantes parasites à fleurs violettes ou roses qui poussent au pied des céréales
+  - céréales rabougries et jaunies, qui semblent manquer d'eau même après la pluie
+  - peu ou pas d'épis ou de panicules
+keywords: [striga, herbe sorcière, fleurs violettes, parasite, racines, jaunissement, rabougri]
+season: Toute la campagne ; les dégâts commencent sous terre avant que le striga ne sorte
+severity: high
+management:
+  prevention:
+    - Utiliser les variétés tolérantes ou résistantes recommandées localement
+    - Combiner plusieurs méthodes pendant plusieurs années, car aucune ne suffit seule
+  cultural:
+    - Arracher le striga régulièrement, avant qu'il ne fleurisse et ne produise des graines
+    - Faire une rotation avec des cultures pièges (légumineuses, coton, tournesol) qui font germer les graines de striga sans le laisser se développer
+    - Associer la céréale au desmodium, qui réduit peu à peu le stock de graines de striga dans le sol
+  biological: []
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Purple witchweed
+    publisher: Infonet-Biovision
+    url: https://www.infonet-biovision.org/PlantHealth/MinorPests/purple-witchweed
+    consulted_on: 2026-09-25
+review_status: sourced

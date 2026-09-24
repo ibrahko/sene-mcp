@@ -1,0 +1,30 @@
+id: maize-streak-virus
+crops: [maize]
+names:
+  fr: Virus de la striure du maïs
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Maize streak virus (MSV)
+kind: disease
+symptoms:
+  - fines stries blanches à jaunâtres, parallèles aux nervures des feuilles
+  - stries interrompues, en pointillés, sur toute la longueur de la feuille
+  - plants infectés jeunes qui ne forment pas d'épi
+keywords: [stries, striure, rayures jaunes, feuilles rayées, virus, cicadelles]
+season: Surtout sur les plants jeunes ; transmis par de petites cicadelles
+severity: high
+management:
+  prevention:
+    - Utiliser les variétés tolérantes ou résistantes disponibles
+    - Semer tôt dans la saison, avant le pic de présence des cicadelles
+  cultural:
+    - Éliminer les graminées sauvages autour et dans le champ, où le virus se conserve
+  biological: []
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Maize streak virus
+    publisher: Infonet-Biovision
+    url: https://infonet-biovision.org/PlantHealth/MinorPests/maize-streak-virus
+    consulted_on: 2026-09-25
+review_status: sourced

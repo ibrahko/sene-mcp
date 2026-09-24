@@ -1,0 +1,33 @@
+id: rice-gall-midge
+crops: [rice]
+names:
+  fr: Cécidomyie africaine du riz
+  bm: null  # added only after review by a Bambara speaker
+  scientific: Orseolia oryzivora
+kind: insect
+symptoms:
+  - tubes blanc argenté qui remplacent la jeune feuille, comme une tige d'oignon (galles)
+  - galles qui apparaissent 20 à 40 jours après le repiquage
+  - talles attaquées qui ne donnent pas de panicule
+  - plants rabougris et faible rendement
+keywords: [galle, tige d'oignon, tube argenté, pas de panicule, cécidomyie]
+season: Début de campagne, de 20 à 40 jours après le repiquage
+severity: high
+management:
+  prevention:
+    - Utiliser les variétés résistantes recommandées localement
+    - Semer tôt et en même temps sur de grandes surfaces
+  cultural:
+    - Éliminer les repousses de riz, les plants spontanés et le riz sauvage, qui hébergent l'insecte
+    - Éviter les écartements trop serrés entre les plants
+  biological:
+    - Préserver les guêpes parasitoïdes et les herbes qui les abritent en bordure
+treatment_guidance: >
+  Pour tout traitement, contactez le service agricole ou l'agent de vulgarisation
+  de votre zone.
+sources:
+  - title: Rice (Revised)
+    publisher: Infonet-Biovision
+    url: https://infonet-biovision.org/crops-fruits-vegetables/rice-revised
+    consulted_on: 2026-09-25
+review_status: sourced
